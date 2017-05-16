@@ -59,7 +59,7 @@
   _.each = function (collection, iterator) {
     // each is similar to for each native of arrays 
     // each gives access to item at index, the index and the collection that is being iterated 
-    
+
     // check if collection is an array 
     if (typeof collection === 'object' && Array.isArray(collection)) {
       for (var i = 0; i < collection.length; i++) {
@@ -67,12 +67,12 @@
       }
     } else {
       // if collection is a object, give access to value, key and collection 
-      for ( var key in collection ) {
+      for (var key in collection) {
         iterator(collection[key], key, collection);
       }
     }
   };
-  
+
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
@@ -127,7 +127,7 @@
   // Produce a duplicate-free version of the array.
   _.uniq = function (array) {
     // create array to store unique values 
-    var uniqArray = []; 
+    var uniqArray = [];
     // iterate through the array to see if a element is unique in output array 
     for (var i = 0; i < array.length; i++) {
       // if element is not present in output array, add element to output array 
@@ -136,7 +136,7 @@
       }
     }
     //return unique values 
-    return uniqArray; 
+    return uniqArray;
   };
 
 
@@ -199,8 +199,8 @@
   //          No accumulator is given so the first element is used.
   _.reduce = function (collection, iterator, accumulator) {
     // check to see if accumulator is defined 
-      // use new var to hold value 
-        // value of accumulator could be changed by iterator function 
+    // use new var to hold value 
+    // value of accumulator could be changed by iterator function 
     var status = accumulator === undefined;
     // iterate through the collection 
     for (var i = 0; i < collection.length; i++) {
@@ -218,7 +218,7 @@
     return accumulator;
   };
 
-  
+
 
   // Determine if the array or object contains a given value (using `===`).
   _.contains = function (collection, target) {
@@ -237,8 +237,8 @@
   _.every = function (collection, iterator) {
     // TIP: Try re-using reduce() here.
     // declare output 
-      // default for the output should be true 
-    var result = true; 
+    // default for the output should be true 
+    var result = true;
     // edge case if iterator is not present
     if (iterator === undefined) {
       // iterate through each element to check if its truthy
@@ -246,14 +246,14 @@
         result = result && collection[i];
       }
     } else {
-    
-   // iterate through each element to check if passes truth test 
+
+      // iterate through each element to check if passes truth test 
       for (var i = 0; i < collection.length; i++) {
         result = result && iterator(collection[i]);
       }
     }
     //return result
-    return !!result; 
+    return !!result;
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
@@ -261,9 +261,9 @@
   _.some = function (collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
     // declare output 
-      // default for the output should be false
-        // for or comparisions begin with false
-    var result = false; 
+    // default for the output should be false
+    // for or comparisions begin with false
+    var result = false;
     // edge case if iterator is not present
     if (iterator === undefined) {
       // iterate through each element to check if its truthy
@@ -271,14 +271,14 @@
         result = result || collection[i];
       }
     } else {
-   // iterate through each element to check if passes truth test 
-    // use or to check if atleast one element passes truth test 
+      // iterate through each element to check if passes truth test 
+      // use or to check if atleast one element passes truth test 
       for (var i = 0; i < collection.length; i++) {
         result = result || iterator(collection[i]);
       }
     }
     //return result
-    return !!result; 
+    return !!result;
   };
 
 
@@ -300,24 +300,41 @@
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function (obj1, ...theArgs) { 
+  _.extend = function (obj1, ...theArgs) {
     // 1st arg should be target object, rest should be multiple object 
-      // use rest prams 
+    // use rest prams 
     // iterate through the args 
     for (var i = 0; i < theArgs.length; i++) {
       //iterate through the keys in each object
       for (var key in theArgs[i]) {
-          //for each arg add take and add properties not in target obj
+        //for each arg add take and add properties not in target obj
         obj1[key] = theArgs[i][key];
       }
     }
     // return target object
-    return obj1; 
+    return obj1;
   };
 
   // Like extend, but doesn't ever overwrite a key that already
   // exists in obj
-  _.defaults = function (obj) {
+  _.defaults = function (obj1, ...theArgs) {
+    // 1st arg should be target object, rest should be multiple object 
+    // use rest prams 
+    // iterate through the args 
+    for (var i = 0; i < theArgs.length; i++) {
+      //iterate through the keys in each object
+      for (var key in theArgs[i]) {
+        console.log(key, theArgs, theArgs[i]);
+        //for each arg add take and add properties not in target obj
+        // if key is present, dont overwrite
+        if (obj1[key] === undefined) {
+          // add key if not present
+          obj1[key] = theArgs[i][key];
+        }
+      }
+    }
+    // return target object
+    return obj1;
   };
 
 
