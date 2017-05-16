@@ -44,10 +44,10 @@
       return array[array.length - 1];
     } else if (n === 0) { // if n is 0 return empty array 
       return [];
-    } else if (n > array.length) {
+    } else if (n > array.length) { // if n is greater than array length, return the entire array 
       return array;
-    } else {
-      return array.reverse().slice(0, n).reverse();
+    } else {  // if none of the conditions apply, return the last n element of the array 
+      return array.reverse().slice(0, n).reverse(); // reverse array to pick the first n element and reverse again to get the right order of elements
     }
   };
 
@@ -57,10 +57,22 @@
   // Note: _.each does not have a return value, but rather simply runs the
   // iterator function over each item in the input collection.
   _.each = function (collection, iterator) {
-    for (var i = 0; i < collection.length; i++) {
-      iterator(collection[i], i);
+    // each is similar to for each native of arrays 
+    // each gives access to item at index, the index and the collection that is being iterated 
+    
+    // check if collection is an array 
+    if (typeof collection === 'object' && Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        iterator(collection[i], i, collection);
+      }
+    } else {
+      // if collection is a object, give access to value, key and collection 
+      for ( var key in collection ) {
+        iterator(collection[key], key, collection);
+      }
     }
   };
+  
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
