@@ -93,16 +93,50 @@
 
   // Return all elements of an array that pass a truth test.
   _.filter = function (collection, test) {
+    // do not mutate input, create another storage 
+    var filteredCollection = [];
+    // iterate through the collection and pass each element into truth test 
+    for (var i = 0; i < collection.length; i++) {
+      if (test(collection[i])) {
+        // if truth test passes add to filtered collection 
+        filteredCollection.push(collection[i]);
+      }
+    }
+    // return filtered collection 
+    return filteredCollection;
   };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function (collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
+
+    // do not mutate input, create another storage 
+    var filteredCollection = [];
+    // iterate through the collection and pass each element into truth test 
+    for (var i = 0; i < collection.length; i++) {
+      if (!test(collection[i])) {
+        // if truth test passes add to filtered collection 
+        filteredCollection.push(collection[i]);
+      }
+    }
+    // return filtered collection 
+    return filteredCollection;
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function (array) {
+    // create array to store unique values 
+    var uniqArray = []; 
+    // iterate through the array to see if a element is unique in output array 
+    for (var i = 0; i < array.length; i++) {
+      // if element is not present in output array, add element to output array 
+      if (uniqArray.indexOf(array[i]) === -1) {
+        uniqArray.push(array[i]);
+      }
+    }
+    //return unique values 
+    return uniqArray; 
   };
 
 
