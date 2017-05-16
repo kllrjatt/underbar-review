@@ -300,7 +300,19 @@
   //   }, {
   //     bla: "even more stuff"
   //   }); // obj1 now contains key1, key2, key3 and bla
-  _.extend = function (obj) {
+  _.extend = function (obj1, ...theArgs) { 
+    // 1st arg should be target object, rest should be multiple object 
+      // use rest prams 
+    // iterate through the args 
+    for (var i = 0; i < theArgs.length; i++) {
+      //iterate through the keys in each object
+      for (var key in theArgs[i]) {
+          //for each arg add take and add properties not in target obj
+        obj1[key] = theArgs[i][key];
+      }
+    }
+    // return target object
+    return obj1; 
   };
 
   // Like extend, but doesn't ever overwrite a key that already
