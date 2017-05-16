@@ -198,11 +198,16 @@
   //   }); // should be 5, regardless of the iterator function passed in
   //          No accumulator is given so the first element is used.
   _.reduce = function (collection, iterator, accumulator) {
+    // check to see if accumulator is defined 
+      // use new var to hold value 
+        // value of accumulator could be changed by iterator function 
+    var status = accumulator === undefined;
     // iterate through the collection 
     for (var i = 0; i < collection.length; i++) {
       // check to see if accumulator is defined 
-      if (accumulator === undefined) {
-        // if accumlator is undefined, then assign value of element to accumaltor 
+      if (status) {
+        // if accumlator is undefined, then assign value of element to accumaltor ;
+        status = false;
         accumulator = collection[i];
       } else {
         // if accumaltor is defined, then pass accumaltor and element into iterator function 
