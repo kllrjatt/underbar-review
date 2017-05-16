@@ -260,6 +260,25 @@
   // provided, provide a default one
   _.some = function (collection, iterator) {
     // TIP: There's a very clever way to re-use every() here.
+    // declare output 
+      // default for the output should be false
+        // for or comparisions begin with false
+    var result = false; 
+    // edge case if iterator is not present
+    if (iterator === undefined) {
+      // iterate through each element to check if its truthy
+      for (var i = 0; i < collection.length; i++) {
+        result = result || collection[i];
+      }
+    } else {
+   // iterate through each element to check if passes truth test 
+    // use or to check if atleast one element passes truth test 
+      for (var i = 0; i < collection.length; i++) {
+        result = result || iterator(collection[i]);
+      }
+    }
+    //return result
+    return !!result; 
   };
 
 
